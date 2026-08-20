@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Enforce branch naming before allowing commits.
+regex="^(main|develop|(feature|bugfix|hotfix|release)/(EWR)-[1-9][0-9]*-[a-z0-9]+(-[a-z0-9]+)*)$"
+
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ "$branch_name" == "HEAD" ]]; then
+   echo "Error: Cannot validate branch naming in detached HEAD state."
+   exit 1
+fi
+
+if [[ ! $branch_name =~ $regex ]]; then
+   echo "Error: Branch name does not follow the required convention."
+   echo "Allowed examples:"
+   echo "  main"
+   echo "  develop"
+   echo "  feature/EWR-123-add-login"
+   echo "  bugfix/EWR-456-fix-timeout"
+   exit 1
+fi
+
+exit 0

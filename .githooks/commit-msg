@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Enforce Conventional Commits on the subject line, with optional Jira key.
+regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\([a-zA-Z0-9_-]+\))?: (EWR-[1-9][0-9]* )?.{1,50}$"
+
+commit_message=$(head -n 1 "$1")
+
+if [[ ! $commit_message =~ $regex ]]; then
+   echo "Error: Commit message does not follow Conventional Commits format."
+   echo "Example: feat(auth): add login functionality"
+   echo "Example with Jira: feat(auth): EWR-1002 add login functionality"
+   exit 1
+fi
+
+exit 0
