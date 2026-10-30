@@ -1,4 +1,4 @@
-# Endeavour Rockets
+# Endeavour Rockets (OUTDATED)
 
 This repository is structured as a single Next.js application for deployment on Vercel.
 
